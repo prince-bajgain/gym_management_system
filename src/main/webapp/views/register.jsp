@@ -1,10 +1,19 @@
-<%--
+<%@ page import="com.gym.user.model.User" %><%--
   Created by IntelliJ IDEA.
   User: Prince
   Date: 4/19/2026
   Time: 8:35 PM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    User user = (User) session.getAttribute("user");
+
+    if (user != null) {
+        response.sendRedirect("dashboard.jsp");
+        return;
+    }
+
+%>
 <html>
 <head>
     <title>PowerHouse | Join the Tribe</title>
@@ -129,9 +138,9 @@
     </div>
     <% } %>
 
-    <% if(request.getAttribute("error") != null) { %>
+    <% if(request.getParameter("error") != null) { %>
     <div class="msg" style="color: var(--error-red); border: 1px solid var(--error-red);">
-        <%= request.getAttribute("error") %>
+        <%= request.getParameter("error") %>
     </div>
     <% } %>
 

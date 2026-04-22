@@ -1,10 +1,19 @@
-<%--
+<%@ page import="com.gym.user.model.User" %><%--
   Created by IntelliJ IDEA.
   User: Prince
   Date: 4/19/2026
   Time: 8:35 PM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    User user = (User) session.getAttribute("user");
+
+    if (user != null) {
+        response.sendRedirect("dashboard.jsp");
+        return;
+    }
+
+%>
 <html>
 <head>
     <title>PowerHouse | Athlete Login</title>
@@ -14,7 +23,16 @@
             --primary-neon: #ccff00; /* Electric Lime */
             --bg-dark: #121212;
             --card-bg: #1e1e1e;
+            --error-red: #ff4444;
             --text-light: #ffffff;
+        }
+
+        .msg {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
         }
 
         body {
@@ -133,6 +151,12 @@
 <div class="login-container">
     <h2>Welcome Back</h2>
     <p class="subtitle">Ready for your next set?</p>
+
+    <% if(request.getParameter("error") != null) { %>
+    <div class="msg" style="color: var(--error-red); border: 1px solid var(--error-red);">
+        <%= request.getParameter("error") %>
+    </div>
+    <% } %>
 
     <form action="${pageContext.request.contextPath}/user" method="post">
         <input type="hidden" name="action" value="login">

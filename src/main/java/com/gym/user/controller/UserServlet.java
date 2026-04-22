@@ -21,9 +21,20 @@ public class UserServlet extends HttpServlet {
             String password = request.getParameter("password");
             String role = request.getParameter("role");
 
+            boolean emailExists = userDAO.emailExists(email);
+
+            if(emailExists){
+                response.sendRedirect("views/register.jsp?error=email_already_exists");
+                return;
+            }
+
             User user = new User(name,email,password,role);
-            userDAO.registerUser(user);
-            response.sendRedirect("views/login.jsp");
+            boolean registrationStatus = userDAO.registerUser(user);
+            if (registrationStatus) {
+                response.sendRedirect("views/login.jsp?success=registered");
+            } else {
+                response.sendRedirect("views/register.jsp?error=failed");
+            }
         } else if (action.equals("login")){
             String email = request.getParameter("email");
             String password = request.getParameter("password");
@@ -38,8 +49,10 @@ public class UserServlet extends HttpServlet {
                 emailCookie.setHttpOnly(true);
                 response.addCookie(emailCookie);
 
-                response.sendRedirect("/index.jsp");
+                response.sendRedirect("views/dashboard.jsp");
 
+            } else {
+                response.sendRedirect("views/login.jsp?error=failed");
             }
         } else if (action.equals("logout")){
             HttpSession session = request.getSession();
