@@ -162,14 +162,6 @@
             <input type="password" name="password" placeholder="••••••••" required>
         </div>
 
-        <div class="input-group">
-            <label>Access Level</label>
-            <select name="role">
-                <option value="USER">Athlete (User)</option>
-                <option value="ADMIN">Coach (Admin)</option>
-            </select>
-        </div>
-
         <button type="submit">Start Training</button>
     </form>
 

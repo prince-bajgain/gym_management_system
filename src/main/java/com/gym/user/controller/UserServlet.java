@@ -19,7 +19,7 @@ public class UserServlet extends HttpServlet {
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String role = request.getParameter("role");
+            String role = "user";
 
             boolean emailExists = userDAO.emailExists(email);
 

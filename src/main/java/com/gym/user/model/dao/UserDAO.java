@@ -7,8 +7,49 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO implements UserInterface{
+
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users";
+
+        try(Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+        ){
+            while(rs.next()){
+                users.add(new User(
+                        rs.getInt("user_id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        null,
+                        rs.getString("role")
+                ));
+            }
+        } catch (Exception e){
+            System.err.println("Error in getAllUsers: " + e.getMessage());
+        }
+
+        return users;
+    }
+
+    public boolean deleteUser(int id) {
+        String sql = "DELETE FROM users WHERE user_id=?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            System.err.println("Error in deleteUser: " + e.getMessage());
+            return false;
+        }
+    }
 
     public boolean emailExists(String email) {
         String sql = "SELECT 1 FROM users WHERE email=?";

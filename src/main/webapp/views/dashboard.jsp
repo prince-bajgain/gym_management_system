@@ -225,9 +225,9 @@
 <nav class="sidebar">
     <div class="brand">PowerHouse</div>
     <div class="nav-links">
-        <a href="dashboard.jsp" class="active">Dashboard</a>
+        <a href="${pageContext.request.contextPath}/views/dashboard.jsp" class="active">Dashboard</a>
         <a href="add-member.jsp">Add Member</a>
-        <a href="view-members.jsp">View Members</a>
+        <a href="${pageContext.request.contextPath}/admin?action=view">View Members</a>
         <a href="payments.jsp">Payments</a>
         <a href="settings.jsp">Settings</a>
     </div>
