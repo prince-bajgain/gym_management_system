@@ -1,26 +1,30 @@
 package com.gym.user.model;
 
+import java.sql.Timestamp;
+
 public class User {
-    private int id;
-    private String name;
+    private int userId;
+    private String fullName;
     private String email;
-    private String password;
+    private String passwordHash;
+    private String phone;
     private String role;
+    private Timestamp createdAt;
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -31,12 +35,20 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getRole() {
@@ -47,17 +59,31 @@ public class User {
         this.role = role;
     }
 
-    public User(String name, String email, String password, String role){
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public User(int id, String name, String email, String password, String role) {
-        this.id = id;
-        this.name = name;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public User() {}
+
+    public User(String fullName, String email, String passwordHash, String phone, String role) {
+        this.fullName = fullName;
         this.email = email;
-        this.password = password;
+        this.passwordHash = passwordHash;
+        this.phone = phone;
         this.role = role;
+    }
+
+    public User(int userId, String fullName, String email, String passwordHash, String phone, String role, Timestamp createdAt) {
+        this.userId = userId;
+        this.fullName = fullName;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.phone = phone;
+        this.role = role;
+        this.createdAt = createdAt;
     }
 }

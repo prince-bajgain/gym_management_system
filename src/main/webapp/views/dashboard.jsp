@@ -244,7 +244,7 @@
                 <span>Logged in as</span>
                 <strong><%= userEmail %></strong>
             </div>
-            <form action="${pageContext.request.contextPath}/user" method="post" style="display:inline;">
+            <form action="${pageContext.request.contextPath}/auth" method="post" style="display:inline;">
                 <input type="hidden" name="action" value="logout">
                 <button type="submit" class="logout-btn">Logout</button>
             </form>
